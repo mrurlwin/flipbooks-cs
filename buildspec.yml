@@ -8,7 +8,7 @@ phases:
       - composer install --no-progress --no-suggest
       # Start Mysql if you need it
       - yum update -y
-      - yum install -y sqlite3
+      - yum install -y sqlite
       - touch database/database.sqlite
       - php artisan migrate --database=sqlite --force
   pre_build:
