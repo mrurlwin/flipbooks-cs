@@ -7,13 +7,10 @@ phases:
     commands:
       - composer install --no-progress --no-suggest
       # Start Mysql if you need it
-      - yum-config-manager --disable mysql80-community
-      - yum-config-manager --enable mysql57-community
       - yum update -y
-      - yum install -y mysql-community-server
-      - /usr/bin/mysql -s /bin/bash -c "/usr/sbin/mysqld" &
-      - /usr/bin/mysql  -u root -e "GRANT ALL ON *.* TO 'test'@'localhost' IDENTIFIED BY '' WITH GRANT OPTION"
-      - mysqladmin -u test create test
+      - yum install -y sqlite3
+      - touch database/database.sqlite
+      - php artisan migrate --database=sqlite --force
   pre_build:
     commands:
       - ./vendor/bin/phpunit
